@@ -1,7 +1,7 @@
 from tkinter import*
 
 window=Tk()
-window.title("명선이")
+window.title("502번째 확진자 유명선")
 window.configure(bg="white")
 window.geometry("240x240")
 
