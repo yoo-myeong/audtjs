@@ -1,7 +1,7 @@
 from tkinter import*
 
 window=Tk()
-window.title("계산기")
+window.title("명선이꺼")
 window.configure(bg="white")
 window.geometry("240x240")
 
@@ -19,7 +19,7 @@ def cal(key):
 
 def button_press(val):
     label.insert(END, val)
- 
+
 
 label=Entry(window, width=22, justify='right')
 label.grid(row=0, column=0, columnspan=3, pady=10, padx=4) #padx는 상하여백, pady는 좌우여백
@@ -45,7 +45,7 @@ button_0 = Button(window,text='0', width=5, command=lambda:button_press('0'))
 button_dat = Button(window, text='.',width=5, command=lambda:button_press('.'))
 button_equal = Button(window,text='=', width=5, command=lambda:cal('='))
 button_plus = Button(window,text='+', width=5, command=lambda:cal('+'))
- 
+
 
 
 label.grid(row=0,column=0,columnspan=3,pady=10,padx=4)
