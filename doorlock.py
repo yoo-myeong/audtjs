@@ -1,7 +1,7 @@
 from tkinter import*
 from tkinter import messagebox
 top = Tk()
-top.title("도어락으로 만들기")
+top.title("도어락으로 ")
 top.geometry("200x300")
 top.configure(bg="blue")
 top.resizable(False, False)
