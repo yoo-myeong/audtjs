@@ -2,7 +2,7 @@ from tkinter import*
 import random
 
 window=Tk()
-window.title("계산기")
+window.title("도어락")
 window.configure(bg="white")
 window.geometry("450x400")
 
