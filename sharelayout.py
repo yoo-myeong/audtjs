@@ -65,6 +65,7 @@ def doorlock():
         answer = 1234
         number = val
         if int(number) == answer:
+            back()
             return messagebox.showinfo("확인", "정답입니다.")
             """
             pin = 18
@@ -116,6 +117,10 @@ def cal(key):
 
             p_i = Button(window,height =120, width =120, image=pass2, command=doorlock)
             p_i.place(x=600, y=280)
+
+def back():
+    clear()
+    button1 = Button(window, text='화면을 터치해주세요', command=lambda: cal('화면을 터치해주세요')).place(x=330,y=220)
 
 
 button1 = Button(window, text='화면을 터치해주세요', command=lambda: cal('화면을 터치해주세요')).place(x=330,y=220)
