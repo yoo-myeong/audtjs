@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
+
+
 """
 import RPi.GPIO as GPIO
 import time
@@ -7,7 +9,7 @@ import time
 
 window = Tk()
 window.geometry("800x480")
-
+window.configure(bg="black")
 
 
 def clear():
@@ -67,6 +69,7 @@ def doorlock():
         if int(number) == answer:
             back()
             return messagebox.showinfo("확인", "정답입니다.")
+
             """
             pin = 18
             GPIO.setmode(GPIO.BOARD)
@@ -104,6 +107,7 @@ def doorlock():
 
 call = PhotoImage(file = "call.gif")
 pass2 = PhotoImage(file ="pass2.gif")
+
 def cal(key):
     if key=="화면을 터치해주세요":
         mylist = window.place_slaves()
@@ -112,7 +116,7 @@ def cal(key):
 
             window.configure(bg="black")
 
-            c_i = Button(window,height =120, width =120, image = call)
+            c_i = Button(window,height =120, width =120, image = call, command=interphone)
             c_i.place(x=600, y=80)
 
             p_i = Button(window,height =120, width =120, image=pass2, command=doorlock)
@@ -122,10 +126,17 @@ def back():
     clear()
     button1 = Button(window, text='화면을 터치해주세요', command=lambda: cal('화면을 터치해주세요')).place(x=330,y=220)
 
+end_call = PhotoImage(file = "end_call.gif")
+
+def interphone():
+    clear()
+    e_i = Button(window, height = 120, width = 120, image = end_call,command = back)
+    e_i.place(x=600,y=280)
+
+
 
 button1 = Button(window, text='화면을 터치해주세요', command=lambda: cal('화면을 터치해주세요')).place(x=330,y=220)
 
-Label(window, text ="xx동 xx호").place(x=360,y=150)
 
 
 
