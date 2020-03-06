@@ -1,5 +1,10 @@
 from tkinter import *
 from tkinter import messagebox
+"""
+import RPi.GPIO as GPIO
+import time
+"""
+
 window = Tk()
 window.geometry("800x480")
 
@@ -61,10 +66,27 @@ def doorlock():
         number = val
         if int(number) == answer:
             return messagebox.showinfo("확인", "정답입니다.")
+            """
+            pin = 18
+            GPIO.setmode(GPIO.BOARD)
+            GPIO.setup(pin, GPIO.OUT)
+            p = GPIO.PWM(pin, 50)
+            p.start(0)
+            cnt = 0
 
+            p.ChangeDutyCycle(12.5)
+            time.sleep(5)
+
+            p.ChangeDutyCycle(2.5)
+            time.sleep(1)
+
+            p.stop()
+            GPIO.cleanup()
+            """
         else:
             display.delete(0, END)
             return messagebox.showinfo("확인", "틀렸습니다.")
+
 
 
 
