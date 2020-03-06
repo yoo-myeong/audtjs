@@ -1,15 +1,19 @@
 from tkinter import *
 from tkinter import messagebox
+"""
+import RPi.GPIO as GPIO
+import time
+"""
 
 window = Tk()
 window.geometry("800x480")
+
 
 
 def clear():
     mylist = window.place_slaves()
     for i in mylist:
         i.destroy()
-
 
 def doorlock():
     mylist = window.place_slaves()
@@ -29,7 +33,7 @@ def doorlock():
         button_3 = Button(window, text='3', height=2, width=10, command=lambda: button_press('3'))
 
         button_0 = Button(window, text='0', height=2, width=10, command=lambda: button_press('0'))
-        button_dat = Button(window, text='delete', height=2, width=10, command=lambda:ce())
+        button_dat = Button(window, text='*', height=2, width=10, command=lambda: ce())
         button_equal = Button(window, text='#', height=2, width=10, command=lambda: b_correct('#'))
 
         button_7.place(x=600, y=140)
@@ -48,10 +52,10 @@ def doorlock():
         button_0.place(x=690, y=440)
         button_equal.place(x=780, y=440)
 
-        Button(window, text='뒤로가기', width=20, command=lambda: cal('화면을 터치해주세요')).place(x=650, y=100)
+        Button(window, text='뒤로가기', width=20, command=lambda:cal('화면을 터치해주세요')).place(x=655, y=100)
 
-        display = Entry(window, width=20, show='*', justify="right")  # justify = "right" 숫자가 오른쪽으로부터
-        display.place(x=652, y=50)
+        display = Entry(window, width=20, justify="right", show='*')  # justify = "right" 숫자가 오른쪽으로부터
+        display.place(x=657, y=50)
 
     def button_press(val):  # 입력받기
         display.insert("end", val)  # display 입력창의 맨끝에 매개변수값을 입력
@@ -62,7 +66,23 @@ def doorlock():
         number = val
         if int(number) == answer:
             return messagebox.showinfo("확인", "정답입니다.")
+            """
+            pin = 18
+            GPIO.setmode(GPIO.BOARD)
+            GPIO.setup(pin, GPIO.OUT)
+            p = GPIO.PWM(pin, 50)
+            p.start(0)
+            cnt = 0
 
+            p.ChangeDutyCycle(12.5)
+            time.sleep(5)
+
+            p.ChangeDutyCycle(2.5)
+            time.sleep(1)
+
+            p.stop()
+            GPIO.cleanup()
+            """
         else:
             display.delete(0, END)
             return messagebox.showinfo("확인", "틀렸습니다.")
@@ -81,20 +101,27 @@ def doorlock():
                 display.delete(0, END)
 
 
+call = PhotoImage(file = "call.gif")
+pass2 = PhotoImage(file ="pass2.gif")
 def cal(key):
-    if key == "화면을 터치해주세요":
+    if key=="화면을 터치해주세요":
         mylist = window.place_slaves()
         for i in mylist:
             i.destroy()
 
             window.configure(bg="black")
 
-            pass2 = Button(window, text='pass', width=5, command=doorlock)
-            pass2.place(x=600, y=300)
+            c_i = Button(window,height =120, width =120, image = call)
+            c_i.place(x=600, y=80)
+
+            p_i = Button(window,height =120, width =120, image=pass2, command=doorlock)
+            p_i.place(x=600, y=280)
 
 
-button1 = Button(window, text='화면을 터치해주세요', command=lambda: cal('화면을 터치해주세요')).place(x=330, y=220)
+button1 = Button(window, text='화면을 터치해주세요', command=lambda: cal('화면을 터치해주세요')).place(x=330,y=220)
 
-Label(window, text="xx동 xx호").place(x=360, y=150)
+Label(window, text ="xx동 xx호").place(x=360,y=150)
+
+
 
 window.mainloop()
