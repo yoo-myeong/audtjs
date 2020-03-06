@@ -131,7 +131,7 @@ end_call = PhotoImage(file = "end_call.gif")
 def interphone():
     clear()
     e_i = Button(window, height = 120, width = 120, image = end_call,command = back)
-    e_i.place(x=600,y=280)
+    e_i.place(x=685,y=350)
 
 
 
