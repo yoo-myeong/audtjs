@@ -1,6 +1,14 @@
 from tkinter import *
 from tkinter import messagebox
 import tkinter.font
+import datetime
+from threading import *
+from tkinter import messagebox
+import cv2
+import sys
+from PIL import Image,ImageTk
+
+
 
 """
 import RPi.GPIO as GPIO
@@ -12,6 +20,42 @@ window.geometry("780x450")
 window.configure(bg="black")
 
 
+def cameraon():
+    cvFrame=Frame(window)
+    cvFrame.place(x=100,y=75)
+
+    lbl1=Label(cvFrame)
+    lbl1.grid(row=0,column=0)
+        
+    def ExitButton():
+            sys.exit()
+
+    btn=Button(cvFrame,text="Exit")
+    btn.place(x=0,y=300)
+    cap=cv2.VideoCapture(0)
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH,448)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT,350)
+    frame_size=(int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
+    print('frame_size=',frame_size)
+    
+
+    def show_frame():
+        retval,frame=cap.read()
+        frame=cv2.flip(frame,1)
+        cv2image=cv2.cvtColor(frame,cv2.COLOR_BGR2RGBA)
+        img=Image.fromarray(cv2image)
+
+        imgtk=ImageTk.PhotoImage(image=img)
+
+        lbl1.imgtk=imgtk
+        lbl1.configure(image=imgtk)
+
+            
+
+        window.after(10,show_frame)
+    
+
+    show_frame()
 def clear():
     mylist = window.place_slaves()
     for i in mylist:
@@ -58,6 +102,7 @@ def doorlock():
 
         display = Entry(window, width=20, justify="right", show='*')  # justify = "right" 숫자가 오른쪽으로부터
         display.place(x=505, y=50)
+        cameraon()
 
     def button_press(val):  # 입력받기
         display.insert("end", val)  # display 입력창의 맨끝에 매개변수값을 입력
@@ -111,17 +156,16 @@ pass2 = PhotoImage(file ="pass2.gif")
 
 def cal(key):
     if key=="화면을 터치해주세요":
-        mylist = window.place_slaves()
-        for i in mylist:
-            i.destroy()
+        clear()
 
-            window.configure(bg="black")
+        window.configure(bg="black")
 
-            c_i = Button(window,height =120, width =120, image = call, command=interphone)
-            c_i.place(x=600, y=70)
+        c_i = Button(window,height =120, width =120, image = call, command=interphone)
+        c_i.place(x=600, y=70)
 
-            p_i = Button(window,height =120, width =120, image=pass2, command=doorlock)
-            p_i.place(x=600, y=250)
+        p_i = Button(window,height =120, width =120, image=pass2, command=doorlock)
+        p_i.place(x=600, y=250)
+        cameraon()
 
 def back():
     clear()
@@ -137,6 +181,7 @@ def interphone():
     label.place(x=582, y=150)
     e_i = Button(window, height = 120, width = 120, bd=-1, image = end_call,command = back)
     e_i.place(x=600,y=250)
+    cameraon()
 
 font=tkinter.font.Font(family="맑은 고딕", size=20, slant="italic")
 font2=tkinter.font.Font(family="맑은 고딕", size=15)
