@@ -1,0 +1,5 @@
+처음에 얼굴인식을 하고 이름이 face_recog 의 hisname에 저장이 되는데
+그것을 main파이썬인 newtry에서 name=face_recog.hisname으로 받는다.
+hisname이 yoo일경우 얼굴인식은 꺼지고 newtry가 실행된다.
+이제 hisname을 간단한 소켓을 통해 indoor로 전송만 하면 된다.
+그럼 indoor에선 if else문으로 범죄자 혹은 범죄자 아님으로 넘어가도록 설정한다.
